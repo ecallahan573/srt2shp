@@ -4,6 +4,7 @@ Created on Mon Feb 25 15:55:15 2019
 
 @author: ecallahan
 https://github.com/ecallahan573
+https://www.cteh.com/
 
 Parses SRT files produced by DJI drones when recording video. Converts data into an excel spreadsheet and ESRI shapefiles (Points and Lines)
 """
