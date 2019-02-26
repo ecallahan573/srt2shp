@@ -23,7 +23,7 @@ class SRTReader():
     
     def process_srt(self):
         """
-        Scans script directory for DJI SRT files for parsing.  Saves SRT conctents to excel spreadsheet
+        Scans script directory for DJI SRT files for parsing.  Saves SRT conctents to excel spreadsheet, shapefiles,
         and returnds Pandas dataframe.
         ----
         """
@@ -60,9 +60,13 @@ class SRTReader():
             
             df = pd.DataFrame.from_dict(dicts)
             
+            self.create_shps(df)
+
             df.to_excel(f'{filename!s}.xls',index=False)
-                    
-            return df
+            
+            del dicts
+            
+        return df
     
     def fieldnames(self, dataframe):
         """
@@ -151,6 +155,3 @@ if __name__ == '__main__':
     srt = SRTReader()        
         
     df = srt.process_srt()
-    
-    srt.create_shps(df)
-
