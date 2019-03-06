@@ -13,9 +13,11 @@ Install required python libraries using the requirements.txt file.
 pip install -r requirements.txt
 ~~~~
 
-3. Place the SRT files you would like to process in the directory where the srt2shp.py file is saved
+3. Place the SRT files you would like to process in the directory where the srt2shp.py file is saved.
 
-4. Run the srt2shp.py script
+4. Run the srt2shp.py script.
 ~~~~
 python srt2shp.py
 ~~~~
+
+5. Files will be saved in the "Converted Files" folder where the script was executed.

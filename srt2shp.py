@@ -18,6 +18,7 @@ import pandas as pd
 from glob import glob
 from datetime import datetime
 import shapefile as shp
+import os
 
 
 class SRTReader():
@@ -35,11 +36,18 @@ class SRTReader():
             List of file paths to process
         """
         
+        self.export_folder = os.path.join(os.getcwd(), 'Converted Files')
+        
+        if not os.path.isdir(self.export_folder): # Check if export folder exists and create it if does not
+            os.mkdir(self.export_folder)
+        
         if files == []:
             files = glob('*.srt') # Search script directory for dji srt files
         
         for filename in files:
-        
+            
+            print(f'Reading {filename!s}...')
+            
             with open(filename,'r') as srt:
                 srtfile = srt.read()
             
@@ -69,10 +77,16 @@ class SRTReader():
             df = pd.DataFrame.from_dict(dicts)
             
             self.create_shps(df)
+            
+            excel_file = f'{filename!s}.xls'
+            
+            print(f'Creating {excel_file!s}...')
 
-            df.to_excel(f'{filename!s}.xls',index=False)
+            df.to_excel(os.path.join(self.export_folder, excel_file),index=False)
             
             del dicts
+            
+            input('\nProcessing complete.  Press ENTER to close.')
             
         return df
     
@@ -105,7 +119,7 @@ class SRTReader():
         wkt = urllib.request.urlopen("http://spatialreference.org/ref/epsg/{0}/prettywkt/".format(epsg_code))
         projection = wkt.read().decode('utf-8').replace(" ","").replace("\n", "")
     
-        with open(filename + '.prj','w') as prjfile:
+        with open(os.path.join(self.export_folder, filename + '.prj'),'w') as prjfile:
             prjfile.write(projection)
         
         return projection
@@ -121,9 +135,10 @@ class SRTReader():
         
         # Generate line shapefile
         d = dataframe.to_dict(orient='records')
-        filename_path = d[0]['file'].replace('.SRT','_flightpath')
-        filename_points = d[0]['file'].replace('.SRT','_points')
-    
+        filename_path = os.path.join(self.export_folder, d[0]['file'].replace('.SRT','_flightpath'))
+        filename_points = os.path.join(self.export_folder, d[0]['file'].replace('.SRT','_points'))
+        
+        print(f'Creating shapefile {filename_path!s}.shp')
         w = shp.Writer(filename_path)
         
         w.field('filename', 'C')
@@ -141,6 +156,7 @@ class SRTReader():
         w.close()
         
         # Generate point shapefile 
+        print(f'Creating shapefile {filename_points!s}.shp')
         p = shp.Writer(filename_points)
         
         cols = self.fieldnames(dataframe)
