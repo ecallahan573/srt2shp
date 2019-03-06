@@ -5,7 +5,7 @@ A demo.srt file is included for testing.
 
 # Instructions
 
-1. Install python (https://www.python.org/downloads/)
+1. Install python if you don't already have it (https://www.python.org/downloads/)
 
 2. Open a terminal or command prompt and navigate the the folder wher the requirements.txt file is saved. 
 Install required python libraries using the requirements.txt file.

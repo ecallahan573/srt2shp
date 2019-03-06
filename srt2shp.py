@@ -6,7 +6,12 @@ Created on Mon Feb 25 15:55:15 2019
 https://github.com/ecallahan573
 https://www.cteh.com/
 
+srt2shp is licensed under the
+GNU General Public License v3.0
+
 Parses SRT files produced by DJI drones when recording video. Converts data into an excel spreadsheet and ESRI shapefiles (Points and Lines)
+
+Compatible with Python 3.x
 """
 
 import pandas as pd
@@ -21,14 +26,17 @@ class SRTReader():
     and line shapefile.
     """
     
-    def process_srt(self):
+    def process_srt(self, files=[]):
         """
-        Scans script directory for DJI SRT files for parsing.  Saves SRT conctents to excel spreadsheet, shapefiles,
-        and returnds Pandas dataframe.
+        Searches script directory for DJI SRT files for parsing.  Saves SRT conctents to excel spreadsheet, shapefiles, and returnds Pandas dataframe.
         ----
+        
+        files : array, Default None
+            List of file paths to process
         """
         
-        files = glob('*.srt') # Search script directory for dji srt files
+        if files == []:
+            files = glob('*.srt') # Search script directory for dji srt files
         
         for filename in files:
         
@@ -137,6 +145,7 @@ class SRTReader():
         
         cols = self.fieldnames(dataframe)
         
+        # Generate columns for shapefile dbf
         for col in cols:
             if col in ('lat','lng','id'):
                 p.field(col,'F')
@@ -144,8 +153,8 @@ class SRTReader():
                 p.field(col,'C')
             
         for point in d:
-            p.point(point['lng'],point['lat'])
-            p.record(point['camera'],point['file'],point['gps'], point['home_gps'], point['id'], point['lat'], point['lng'], point['time'])
+            p.point(point['lng'],point['lat']) # Y and X coordinate of point
+            p.record(point['camera'],point['file'],point['gps'], point['home_gps'], point['id'], point['lat'], point['lng'], point['time']) # Populate dbf
         
         self.getWKT_PRJ(filename_points,4326)
        
