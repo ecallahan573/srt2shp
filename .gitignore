@@ -1,6 +1,7 @@
 # Project Folders
 /.vscode
 /Converted Files
+/srtvenv
 
 # Project Files
 license.txt

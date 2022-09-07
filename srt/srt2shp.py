@@ -27,7 +27,7 @@ class SRTReader():
     and line shapefile.
     """
     
-    def process_srt(self, files=[]):
+    def process(self, files=[]):
         """
         Searches script directory for DJI SRT files for parsing.  Saves SRT conctents to excel spreadsheet, shapefiles, and returnds Pandas dataframe.
         ----
@@ -179,4 +179,4 @@ class SRTReader():
 if __name__ == '__main__':
     srt = SRTReader()        
         
-    df = srt.process_srt()
+    df = srt.process()
