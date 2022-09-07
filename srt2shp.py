@@ -78,7 +78,7 @@ class SRTReader():
             
             self.create_shps(df)
             
-            excel_file = f'{filename!s}.xls'
+            excel_file = f'{filename!s}.xlsx'
             
             print(f'Creating {excel_file!s}...')
 
@@ -114,7 +114,7 @@ class SRTReader():
             EPSG code of desired spatial reference
         """
         
-        import urllib
+        import urllib.request
     
         wkt = urllib.request.urlopen("http://spatialreference.org/ref/epsg/{0}/prettywkt/".format(epsg_code))
         projection = wkt.read().decode('utf-8').replace(" ","").replace("\n", "")
@@ -166,11 +166,11 @@ class SRTReader():
             if col in ('lat','lng','id'):
                 p.field(col,'F')
             else:
-                p.field(col,'C')
+                p.field(col,'C', '255')
             
         for point in d:
             p.point(point['lng'],point['lat']) # Y and X coordinate of point
-            p.record(point['camera'],point['file'],point['gps'], point['home_gps'], point['id'], point['lat'], point['lng'], point['time']) # Populate dbf
+            p.record(point['id'],point['time'],point['home_gps'], point['gps'], point['lat'], point['lng'], point['camera'], point['file']) # Populate dbf
         
         self.getWKT_PRJ(filename_points,4326)
        
