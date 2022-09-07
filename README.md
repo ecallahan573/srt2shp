@@ -7,17 +7,38 @@ A demo.srt file is included for testing.
 
 1. Install python if you don't already have it (https://www.python.org/downloads/)
 
-2. Open a terminal or command prompt and navigate the the folder wher the requirements.txt file is saved. 
-Install required python libraries using the requirements.txt file.
+2. Open a terminal or command prompt and navigate the the folder where the project is saved. 
+
+3. Create a virtual environment:
 ~~~~
-pip install -r requirements.txt
+python -m venv srtvenv
 ~~~~
 
-3. Place the SRT files you would like to process in the directory where the srt2shp.py file is saved.
-
-4. Run the srt2shp.py script.
+4. Activate the virutal environment
 ~~~~
-python srt2shp.py
+\srtvenv\Scripts\activate
 ~~~~
 
-5. Files will be saved in the "Converted Files" folder where the script was executed.
+5. Make sure you have the latest version of PyPA’s build installed:
+~~~~
+python -m pip install --upgrade build
+~~~~
+
+6. Build the project:
+~~~~
+python -m build
+~~~~
+
+7. Install the project wheel
+~~~
+pip install .\dist\srt2shp-0.0.1-py3-none-any.whl
+~~~
+
+7. Place the SRT files you would like to process in the directory where the srt2shp.py file is saved.
+
+8. Run the srtConvert.py script:
+~~~~
+python srtConvert.py
+~~~~
+
+9. Files will be saved in the "Converted Files" folder where the script was executed.
