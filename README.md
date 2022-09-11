@@ -34,11 +34,12 @@ python -m build
 pip install .\dist\srt2shp-0.0.1-py3-none-any.whl
 ~~~
 
-7. Place the SRT files you would like to process in the directory where the srt2shp.py file is saved.
+# Run the Script
+1. Place the SRT files you would like to process in the directory where the srt2shp.py file is saved.
 
-8. Run the srtConvert.py script:
+2. Run the srtConvert.py script:
 ~~~~
 python srtConvert.py
 ~~~~
 
-9. Files will be saved in the "Converted Files" folder where the script was executed.
+3. Files will be saved in the "Converted Files" folder where the script was executed.
