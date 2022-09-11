@@ -1,9 +1,9 @@
 # srt2shp
-Parses SRT files produced by DJI drones when recording video.  Converts data into an excel spreadsheet and ESRI shapefiles (Points and Lines).
+Parses multiple SRT files produced by DJI drones when recording video.  Converts data into an excel spreadsheet and ESRI shapefiles (Points and Lines).
 
 A demo.srt file is included for testing.
 
-# Instructions
+# Build from Source
 
 1. Install python if you don't already have it (https://www.python.org/downloads/)
 
