@@ -3,7 +3,12 @@ Parses multiple SRT files produced by DJI drones when recording video.  Converts
 
 A demo.srt file is included for testing.
 
-# Build from Source
+# Install
+ ~~~
+ pip install srt2shp
+ ~~~
+
+# Build from Source (Optional)
 
 1. Install python if you don't already have it (https://www.python.org/downloads/)
 
