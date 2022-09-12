@@ -2,6 +2,7 @@
 /.vscode
 /Converted Files
 /srtvenv
+/upx
 
 # Project Files
 license.txt
